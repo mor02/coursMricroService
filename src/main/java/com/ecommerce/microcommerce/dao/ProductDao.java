@@ -7,5 +7,6 @@ import com.ecommerce.microcommerce.models.Product;
 public interface ProductDao {
 
 	public List<Product> findAll();
-	public void saveProduit(Product prd);
+	public Product findProductById(int id);
+	public Product saveProduit(Product prd);
 }

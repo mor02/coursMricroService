@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ecommerce.microcommerce.models.Product;
 
 @Repository
-public class ProductDaoImpl implements ProductDao{
+public class ProductDaoImpl implements ProductDao {
 
 	static List<Product> listeProducts;
 	static {
@@ -20,17 +20,30 @@ public class ProductDaoImpl implements ProductDao{
 		listeProducts.add(p2);
 		listeProducts.add(p3);
 	}
+
 	@Override
 	public List<Product> findAll() {
 		return listeProducts;
 	}
+
 	@Override
-	public void saveProduit(Product prd) {
-		if(prd!=null) {
+	public Product saveProduit(Product prd) {
+		if (prd != null) {
 			listeProducts.add(prd);
 		}
-		
+		return prd;
 	}
 
-	
+	@Override
+	public Product findProductById(int id) {
+
+		for (Product p : listeProducts) {
+			if (p.getId() == id) {
+				return p;
+			}
+		}
+
+		return null;
+	}
+
 }
