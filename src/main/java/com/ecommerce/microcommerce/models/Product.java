@@ -15,6 +15,10 @@ public class Product {
 		this.prix = prix;
 	}
 	
+	public Product() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}

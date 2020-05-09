@@ -24,6 +24,13 @@ public class ProductDaoImpl implements ProductDao{
 	public List<Product> findAll() {
 		return listeProducts;
 	}
+	@Override
+	public void saveProduit(Product prd) {
+		if(prd!=null) {
+			listeProducts.add(prd);
+		}
+		
+	}
 
 	
 }
