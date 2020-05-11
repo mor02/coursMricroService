@@ -26,38 +26,46 @@ public class ProductCtrl {
 	ProductDao productDao;
 	
 	@RequestMapping(value="/products/{id}")
-	public MappingJacksonValue afficherProduit(@PathVariable int id) {
-		SimpleBeanPropertyFilter monFilter = SimpleBeanPropertyFilter.serializeAllExcept("prixAchat");
+	public Product afficherProduit(@PathVariable int id) {
+//		SimpleBeanPropertyFilter monFilter = SimpleBeanPropertyFilter.serializeAllExcept("prixAchat");
+//
+//		
+//		FilterProvider listDeNosFiltres = new SimpleFilterProvider().addFilter("filtreProduct", monFilter);
+//		
+//		
+//		MappingJacksonValue produitsFiltres = new MappingJacksonValue(productDao.findProductById(id));
+//		
+//		produitsFiltres.setFilters(listDeNosFiltres);
+//		
+//		return produitsFiltres;
+		return productDao.findById(id);
+	}
+	
+	
+	@RequestMapping(value="/products/criteres/{limit}")
+	public List<Product> afficherProduitByCriteres(@PathVariable double limit) {
 
-		
-		FilterProvider listDeNosFiltres = new SimpleFilterProvider().addFilter("filtreProduct", monFilter);
-		
-		
-		MappingJacksonValue produitsFiltres = new MappingJacksonValue(productDao.findProductById(id));
-		
-		produitsFiltres.setFilters(listDeNosFiltres);
-		
-		return produitsFiltres;
+		return productDao.findByPrixGreaterThan(limit);
 	}
 	
 	@RequestMapping(value = "/products")
-	public MappingJacksonValue findAll() {
+	public List<Product> findAll() {
 		
 		List<Product> products = productDao.findAll();
-		SimpleBeanPropertyFilter monFilter = SimpleBeanPropertyFilter.serializeAllExcept("prixAchat");
-
-		FilterProvider listDeNosFiltres = new SimpleFilterProvider().addFilter("filtreProduct", monFilter);
-
-		MappingJacksonValue produitsFiltres = new MappingJacksonValue(products);
-
-		produitsFiltres.setFilters(listDeNosFiltres);
+//		SimpleBeanPropertyFilter monFilter = SimpleBeanPropertyFilter.serializeAllExcept("prixAchat");
+//
+//		FilterProvider listDeNosFiltres = new SimpleFilterProvider().addFilter("filtreProduct", monFilter);
+//
+//		MappingJacksonValue produitsFiltres = new MappingJacksonValue(products);
+//
+//		produitsFiltres.setFilters(listDeNosFiltres);
 		
-		return produitsFiltres;
+		return products;
 	}
 	
 	@PostMapping(value= "/products")
 	public ResponseEntity<Object> ajouterProduit(@RequestBody Product prd) {
-		Product prd1 = productDao.saveProduit(prd);
+		Product prd1 = productDao.save(prd);
 		if(prd1==null) {
 			return ResponseEntity.noContent().build();
 		}

@@ -1,13 +1,17 @@
 package com.ecommerce.microcommerce.models;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 //@JsonIgnoreProperties(value="id")
-@JsonFilter("filtreProduct")
+//@JsonFilter("filtreProduct")
+@Entity
 public class Product {
 
 	//@JsonIgnore
+	@Id
+	@GeneratedValue
 	private int id;
 	
 	private String name;
