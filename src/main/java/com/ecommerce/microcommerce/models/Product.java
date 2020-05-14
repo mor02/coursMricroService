@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.Length;
+
 //@JsonIgnoreProperties(value="id")
 //@JsonFilter("filtreProduct")
 @Entity
@@ -13,7 +15,8 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private int id;
-	
+	//Ajouter l'attribut message pour personnaliser le message
+	@Length(min=5,max=25)
 	private String name;
 	
 	private double prix;
